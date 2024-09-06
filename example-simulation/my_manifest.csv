@@ -1,0 +1,5 @@
+Id,OutputDirectory,Lambda,Delta,V_max,d_min,L_car,L_track,TimeStep,t_max,LaneCount,LaneVelocityWeights,PassingModifier,ImpatienceStep
+0862bdf9-e1d4-497b-aee3-f11bf6f3abcd,example-simulation/output/,1.0,0.0,40.0,7.5,5.0,1000.0,0.05,1000.0,2,[1.0],0.2,0.001
+08a28db9-df8a-483b-9758-4a84abf551fd,example-simulation/output/,1.0,0.0,40.0,7.5,5.0,1000.0,0.05,1000.0,2,[1.0],0.2,0.001
+3c5e98bc-04cc-4ba1-ba7e-c10c88305be8,example-simulation/output/,1.0,0.0,40.0,7.5,5.0,1000.0,0.05,1000.0,2,[1.0],0.2,0.001
+3a34e596-0efe-4dd3-a10e-66135f283746,example-simulation/output/,1.0,0.0,40.0,7.5,5.0,1000.0,0.05,1000.0,2,[1.0],0.2,0.001

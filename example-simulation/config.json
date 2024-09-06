@@ -1,0 +1,17 @@
+{
+    "Lambda": 1.0,
+    "Delta": 0.00,
+    "V_max": 40.0,
+    "d_min": 7.5,
+    "L_car": 5.0,
+    "L_track": 1000.0,
+    "TimeStep": 0.05,
+    "t_max": 1000.0,
+    "LaneCount": 2,
+    "LaneVelocityWeights": [1.0],
+    "PassingModifier": 0.2,
+    "ImpatienceStep": 0.001,
+    "OutputDirectory": "example-simulation/output/",
+    "PreRunScript": "example-simulation/pre_run_script.py",
+    "PostRunScript": "example-simulation/post_run_script.py"
+}
