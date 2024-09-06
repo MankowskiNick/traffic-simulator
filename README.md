@@ -133,35 +133,35 @@ In order to see a complete simulation example, please see the `example-simulatio
 To run the simulation, you can use the following command:
 
 ```sh
-python main.py --simulation-json <path_to_json_file> [<additional_json_files>] [--simulation-count <count>] [--process-count <count>]
+python simulator.py --simulation-json <path_to_json_file> [<additional_json_files>] [--simulation-count <count>] [--process-count <count>]
 ```
 
 ### Examples
 
 1. **Run a single simulation with one JSON configuration file:**
 ```sh
-python main.py --simulation-json sim_config.json
+python simulator.py --simulation-json sim_config.json
 ```
 
 2. **Run a single simulation with a specified manifest.
 ```sh
-python main.py --simulation-json sim_config.json --manifest my_manifest.csv
+python simulator.py --simulation-json sim_config.json --manifest my_manifest.csv
 ```
 
 
 3. **Run multiple simulations with multiple JSON configuration files:**
 ```sh
-python main.py --simulation-json sim_config1.json sim_config2.json
+python simulator.py --simulation-json sim_config1.json sim_config2.json
 ```
 
 4. **Run 5 simulations using 4 processes:**
 ```sh
-python main.py --simulation-json sim_config.json --simulation-count 5 --process-count 4
+python simulator.py --simulation-json sim_config.json --simulation-count 5 --process-count 4
 ```
 
 5. **Run 5 simulations 3 times each, using 4 processes:**
 ```sh
-python main.py --simulation-json sim_config1.json sim_config2.json --simulation-count 5 --process-count 4
+python simulator.py --simulation-json sim_config1.json sim_config2.json --simulation-count 5 --process-count 4
 ```
 
 ### Error Handling
