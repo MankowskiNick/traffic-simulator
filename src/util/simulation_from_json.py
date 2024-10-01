@@ -35,6 +35,7 @@ class SimulationFromJson(Loggable):
         self.LaneVelocityWeights:   List[float] = data.get('LaneVelocityWeights', [1.0 for _ in range(0, self.LaneCount)])
         self.PassingModifier:       float = data.get('PassingModifier', 0.1)
         self.ImpatienceStep:        float = data.get('ImpatienceStep', 0.001)
+        self.Collided:              bool = False
 
         # Configure pre run script
         preRunFile = data.get('PreRunScript', '')
@@ -45,7 +46,7 @@ class SimulationFromJson(Loggable):
         # Required to supply an instance of the pre run script
         if 'PreRunInstance' not in locals():
             raise RuntimeError("PreRunInstance not defined in pre run script.")
-        self.PreRunScript:          Script = locals()['PreRunInstance']
+        self.PreRunScript: Script = locals()['PreRunInstance']
 
         # Configure post run script
         self.PostRunScript: Script = None
@@ -90,6 +91,8 @@ class SimulationFromJson(Loggable):
         self.log('Evaluating model..')
         self.model.evaluate()
         self.log('Run completed.')
+
+        self.Collided = self.model.collided
 
         # Run post run script
         if self.PostRunScript is not None:

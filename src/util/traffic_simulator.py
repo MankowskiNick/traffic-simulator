@@ -9,7 +9,7 @@ class TrafficSimulator(Loggable):
     def __init__(self, 
             simulation_configs: List[str], 
             manifest: str = 'manifest.csv',
-            simulation_count: int = '1',
+            simulation_count: int = 1,
             process_count: int = 1) -> None:
         super().__init__()
         self.process_count = process_count
