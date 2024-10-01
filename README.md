@@ -77,7 +77,7 @@ You can customize the behavior of the traffic simulation by providing pre-run an
 
 Both pre-run and post-run scripts must inherit from the `Script` class, which provides common functionality for running scripts. When creating implementations of pre-run and post-run scripts, you are required to accept a parameter `simulationParams`, which is of type `SimulationFromJson`, for the `run` method.  The `run` method will be called either immediately before a simulation is ran or immediately after, depending on how you pass it in the JSON. This allows you to pass up-to-date information regarding the simulations to these scripts.
 
-In the run method of your pre-run script, you **must** instantiate a variable `self.Cars`, which is of type `List[Car]`.  This allows you to configure the cars present in the simulation.
+In the run method of your pre-run script, you **must** instantiate a variable `self.Cars`, which is of type `List[Car]`.  This allows you to configure the cars present in the simulation.  Each car has a `tags` parameter that is a list, where you can add different tags for each car.  For example, if you want to mark a car as `aggressive`, then you can simply add the `aggressive` tag in the car.  These user defined tags are intended to give better control over how you are gathering data in the `PostRunScript`.
 
 In order for these scripts to be properly ran by the simulator, you must provide an instance of them under the local variable `PreRunInstance` or `PostRunInstance`, depending on the type of script.  If you fail to define an instance, you will encounter a runtime error, since the simulator is unable to provide an instance of your script otherwise.
 
