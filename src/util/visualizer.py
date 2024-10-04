@@ -1,6 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-from model.carbase import CarBase
+from models.carbase import CarBase
 from math import *
 import csv
 
@@ -89,8 +89,13 @@ class Visualizer:
         self.fps_modifier = int(self.fps / 10)
 
     def update_cars(self):
-        if self.__i__ >= len(self.cars[0].time):
+        # Keep parsing simulation data if we're running
+        if self.running:
+            self.__i__ += 1
+
+        if self.__i__ >= self.max_time_index:
             self.running = False
+            self.__i__ = 0
             return
 
         for c in self.cars:
@@ -100,14 +105,17 @@ class Visualizer:
             draw_car.x = int(c.pos[self.__i__] * self.draw_scalar)
             draw_car.y = int(c.lanes[self.__i__] * self.lane_width) + lane_start_y
 
-        # Keep parsing simulation data if we're running
-        if self.running:
-            self.__i__ += 1
-
     # ModelDriver loop
     def run(self) -> None:
 
+        self.max_time_index = min([len(c.time) for c in self.cars])
+
+
         while self.window_active:
+
+            # if self.__i__ >= max_time_index:
+            #     self.__i__ = 0
+            #     self.running = False
 
             # Limit frame rate
             self.clock.tick(self.fps)
@@ -137,8 +145,6 @@ class Visualizer:
                     # Pause
                     else:
                         self.running = not self.running
-                        if self.__i__ >= len(self.cars[0].time):
-                            self.__i__ = 0
 
             # Update car positions if the visualization is running
             if self.running:
