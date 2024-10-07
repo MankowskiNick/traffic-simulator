@@ -8,6 +8,7 @@ This project simulates traffic flow using various parameters defined in a JSON f
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Output](#output)
+- [Visualizer](#visualizer)
 <!-- - [Contributing](#contributing) -->
 <!-- - [License](#license) -->
 
@@ -189,3 +190,92 @@ Here is an example manifest produced by the tool:
 | 1eeb834e-4640-4d18-9555-cc39d9fe4477 | example-simulation/output/ | 1.0    | 0.0   | 40.0  | 7.5   | 5.0   | 1000.0  | 0.05     | 10.0  | 2         | [1.0]               | 0.2             | 0.001          |
 | 512fab2b-82a1-49e4-85ab-ee8d912af438 | example-simulation/output/ | 1.0    | 0.0   | 40.0  | 7.5   | 5.0   | 1000.0  | 0.05     | 10.0  | 2         | [1.0]               | 0.2             | 0.001          |
 | 657acebb-e1fc-4a1d-a309-925a93858096 | example-simulation/output/ | 1.0    | 0.0   | 40.0  | 7.5   | 5.0   | 1000.0  | 0.05     | 10.0  | 2         | [1.0]               | 0.2             | 0.001          |
+
+## Visualizer
+
+### Overview
+
+The `visualize.py` script is used to visualize the results of traffic simulations. It takes several arguments to configure the visualization, including the manifest file, output directory, simulation ID, and screen size.
+
+When ran, the tool will open a Pygame window that can run the simulation visualization.
+
+### Usage
+
+To run the `visualize.py` script, use the following command:
+
+```sh
+python3 traffic-simulator/src/visualize.py --manifest path/to/manifest.csv --dir path/to/output --id <simulation_id> --screen-size <width> <height>
+```
+
+Once the visualizer is ran, it will launch a Pygame window that will contain the simulation visualization.
+To control the simulation, you can use the following keyboard controls.
+- `UP arrow`: Increase FPS of visualization.  This will speed up the visualization.
+- `DOWN arrow`: Decrease FPS of visualization.  This will slow down the visualization.
+- `ESCAPE`: Exit the visualization
+- `Other keypress`: Pause/Play simulation
+
+### Arguments
+- `--manifest`: Path to the manifest file that contains the simulation parameters.
+- `--dir`: Directory where the simulation output files are stored.
+- `--id`: Unique identifier for the simulation.  The raw simulation data for the simulation you are viewing should be located in the output directory specified by `--dir` and should have a file title of `<simulation-id>.csv`.
+- `--screen-size`: (Optional) Screen size for the visualization in the form `<width> <height>`. Default is 800x600.
+
+### Example
+```sh
+python3 traffic-simulator/src/visualize.py --manifest my-simulation/manifest.csv --dir my-simulation/output/ --id c9db361e-6e07-4b56-947b-357aeb1dccd7 --screen-size 640 480
+```
+In this example:
+
+- The manifest file is located at stability-test/manifest.csv.
+- The output directory is stability-test/output/.
+- The simulation ID is c9db361e-6e07-4b56-947b-357aeb1dccd7.
+- The screen size for the visualization is set to 200x200.
+
+## Contributing
+
+We welcome contributions to the Traffic Simulator project! Whether you want to report a bug, suggest a new feature, or submit a pull request, your contributions are greatly appreciated.
+
+### How to Contribute
+
+1. **Fork the repository**:
+    - Click the "Fork" button at the top right corner of the repository page.
+
+2. **Clone your fork**:
+    ```sh
+    git clone https://github.com/<your-username>/traffic-simulator.git
+    cd traffic-simulator
+    ```
+
+3. **Create a new branch**:
+    ```sh
+    git checkout -b my-feature-branch
+    ```
+
+4. **Make your changes**:
+    - Implement your feature, fix the bug, or update documentation.
+
+5. **Commit your changes**:
+    ```sh
+    git add .
+    git commit -m "Description of your changes"
+    ```
+
+6. **Push to your fork**:
+    ```sh
+    git push origin my-feature-branch
+    ```
+
+7. **Create a pull request**:
+    - Go to the original repository and click the "New pull request" button.
+    - Select your branch and submit the pull request.
+
+### Guidelines
+
+- **Code Style**: Follow the existing code style and conventions.
+- **Documentation**: Update documentation to reflect your changes, including comments and `README.md` if necessary.
+
+### Reporting Issues
+
+If you encounter any issues or bugs, please report them using the [GitHub Issues](https://github.com/MankowskiNick/traffic-simulator/issues) page. Provide as much detail as possible, including steps to reproduce the issue and any relevant logs or screenshots.
+
+Thank you for contributing to the Traffic Simulator project!
