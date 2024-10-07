@@ -45,7 +45,16 @@ class Car(CarBase):
         self.impatience = [0.0]
         self.impatience_step = impatience_step
 
+        self.tags = []
+
+
+        ######################
+        # DEPRACATED 9/30/24 #
+        # Replaced by 'tags' #
+        ######################
         self.aggressive = False
+
+
 
     #####################
     # DEPRACATED 9/5/24 #
