@@ -125,7 +125,7 @@ In order to see a complete simulation example, please see the `example-simulatio
 
 ### Arguments
 - `--simulation-json`: **(Required)** One or more JSON files containing simulation parameters.
-- `--manifest`: **Optional** Specify a manifest file.  Default is `manifest.csv`.
+- `--manifest`: **(Optional)** Specify a manifest file.  Default is `manifest.csv`.
 - `--simulation-count`: **(Optional)** Number of simulations to run per supplied config file.  Default is 1.
 - `--process-count`: **(Optional)** Number of processes to use for running concurrent simulations. Increase value to allow simulations to run multithreaded.  Default is 1.
 
