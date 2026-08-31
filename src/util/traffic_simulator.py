@@ -61,6 +61,7 @@ class TrafficSimulator(Loggable):
             writer.writerow([
                 'Id',
                 'OutputDirectory',
+                'CarCount',
                 'Lambda',
                 'Delta',
                 'V_max',
@@ -76,7 +77,8 @@ class TrafficSimulator(Loggable):
             for sim_data in self.results:
                 writer.writerow([
                     sim_data['Id'],
-                    sim_data['OutputDirectory'], 
+                    sim_data['OutputDirectory'],
+                    sim_data['CarCount'],
                     sim_data['Lambda'],  
                     sim_data['Delta'],   
                     sim_data['V_max'],   

@@ -9,6 +9,24 @@ from util.loggable import Loggable
 from util.script import Script
 
 class SimulationFromJson(Loggable):
+    @staticmethod
+    def _load_script(script_file: str, instance_name: str) -> Script:
+        namespace = {
+            '__builtins__': __builtins__,
+            'Car': Car,
+            'Script': Script,
+        }
+
+        with open(script_file, 'r') as file:
+            source = file.read()
+
+        exec(compile(source, script_file, 'exec'), namespace)
+
+        if instance_name not in namespace:
+            raise RuntimeError(f'{instance_name} not defined in {script_file}.')
+
+        return namespace[instance_name]
+
     def __init__(self, json_file: str) -> None:
         super().__init__()
 
@@ -41,22 +59,14 @@ class SimulationFromJson(Loggable):
         preRunFile = data.get('PreRunScript', '')
         if preRunFile == '':
             raise RuntimeError('PreRunScript not supplied.')
-        exec( open(preRunFile).read() )
-
-        # Required to supply an instance of the pre run script
-        if 'PreRunInstance' not in locals():
-            raise RuntimeError("PreRunInstance not defined in pre run script.")
-        self.PreRunScript: Script = locals()['PreRunInstance']
+        self.PreRunScript = self._load_script(preRunFile, 'PreRunInstance')
 
         # Configure post run script
         self.PostRunScript: Script = None
         # If supplied a post run script, configure it
         postRunFile = data.get('PostRunScript', '')
         if postRunFile != '':
-            exec( open( postRunFile).read() ) 
-            if 'PostRunInstance' not in locals():
-                raise RuntimeError('PostRunInstance not defined in post run script.')
-            self.PostRunScript:         PostRunScript = locals()['PostRunInstance']
+            self.PostRunScript = self._load_script(postRunFile, 'PostRunInstance')
 
         self.Cars = None
         self.log('Model parameters loaded.')
@@ -111,6 +121,7 @@ class SimulationFromJson(Loggable):
         return {
                 'Id': self.Id,
                 'OutputDirectory': self.OutputDirectory,
+                'CarCount': len(self.Cars),
                 'Lambda': self.Lambda,
                 'Delta': self.Delta,
                 'V_max': self.V_max,

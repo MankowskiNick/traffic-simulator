@@ -117,8 +117,8 @@ class Model(Loggable):
         if lane != prev_lane:
             return 0
 
-        target_pos = self.cars[i].get_pos_at_time(t - r_t)
-        target_pos_prev = self.cars[i].get_pos_at_time(t - r_t - self.time_step)
+        target_pos = self.cars[i].get_pos_at_time(t)
+        target_pos_prev = self.cars[i].get_pos_at_time(t - self.time_step)
         if target_pos - target_pos_prev < 0:
             target_pos += self.track_length
 
@@ -129,11 +129,11 @@ class Model(Loggable):
             check_car = self.cars[j]
 
             # Only consider lanes immediately next to the target car
-            if abs(check_car.get_lane_at_time(t - r_t) - lane) != 1:
+            if abs(check_car.get_lane_at_time(t) - lane) != 1:
                 continue
 
-            c_pos = check_car.get_pos_at_time(t - r_t)
-            c_pos_prev = check_car.get_pos_at_time(t - r_t - self.time_step)
+            c_pos = check_car.get_pos_at_time(t)
+            c_pos_prev = check_car.get_pos_at_time(t - self.time_step)
 
             if c_pos - c_pos_prev < 0:
                 c_pos += self.track_length
@@ -204,9 +204,9 @@ class Model(Loggable):
             impatience = self.cars[i].get_impatience_at_time(t)
             
             # Get headway in current lane, as well as the headway if the car was in the right and left lane
-            headway = self.cars[i].get_headway_at_time(t - self.cars[i].reaction_time, cur_lane)
-            left_headway = self.cars[i].get_headway_at_time(t - self.cars[i].reaction_time, cur_lane - 1)
-            right_headway = self.cars[i].get_headway_at_time(t - self.cars[i].reaction_time, cur_lane + 1)
+            headway = self.cars[i].get_headway_at_time(t, cur_lane)
+            left_headway = self.cars[i].get_headway_at_time(t, cur_lane - 1)
+            right_headway = self.cars[i].get_headway_at_time(t, cur_lane + 1)
 
             if self.lane_count > 1:
                 # If the headway in the other lanes is larger, then the driver becomes less patient
