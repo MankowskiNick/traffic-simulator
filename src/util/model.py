@@ -58,6 +58,7 @@ class Model(Loggable):
         self.running = True     # running the simulation?
         self.collided = False
         self.collided_ids = []
+        self.collision_time = None
 
         self.lane_changes = []
 
@@ -257,6 +258,8 @@ class Model(Loggable):
                     self.log(f"Collision between car #{self.cars[i].id} and car #{self.cars[j].id} at time t={t}.\n    Car #{self.cars[i].id}: pos={self.cars[i].get_pos_at_time(t)}; vel={self.cars[i].velocity[-1]}\n    Car #{self.cars[j].id}: pos={car.get_pos_at_time(t)}; vel={self.cars[j].velocity[-1]}")
                     self.running = False
                     self.collided = True
+                    if self.collision_time is None:
+                        self.collision_time = float(t)
                     self.collided_ids += [self.cars[i].id, self.cars[j].id]
                     self.end_time = t - self.time_step
 

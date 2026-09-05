@@ -72,7 +72,9 @@ class TrafficSimulator(Loggable):
                 'LaneCount',
                 'LaneVelocityWeights',
                 'PassingModifier',
-                'ImpatienceStep'])
+                'ImpatienceStep',
+                'CollisionIds',
+                'CollisionTime'])
             for sim_data in self.results:
                 writer.writerow([
                     sim_data['Id'],
@@ -88,4 +90,6 @@ class TrafficSimulator(Loggable):
                     sim_data['LaneCount'],   
                     sim_data['LaneVelocityWeights'], 
                     sim_data['PassingModifier'], 
-                    sim_data['ImpatienceStep']])
+                    sim_data['ImpatienceStep'],
+                    sim_data['CollisionIds'],
+                    sim_data['CollisionTime']])
