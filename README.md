@@ -184,6 +184,11 @@ In order to keep track of simulation outputs, this tool will produce a manifest 
 
 Here is an example manifest produced by the tool:
 
+The manifest also appends `CollisionIds` and `CollisionTime`: the unique car IDs
+involved in collisions at the stopping timestep (for example, `[1, 2]`) and the
+simulation time of detection in seconds. Runs without collisions contain `[]`
+and an empty time field.
+
 | Id                                   | OutputDirectory            | Lambda | Delta | V_max | d_min | L_car | L_track | TimeStep | t_max | LaneCount | LaneVelocityWeights | PassingModifier | ImpatienceStep |
 |--------------------------------------|----------------------------|--------|-------|-------|-------|-------|---------|----------|-------|-----------|---------------------|-----------------|----------------|
 | 8d970802-de03-4c61-b12d-ea0307033106 | example-simulation/output/ | 1.0    | 0.0   | 40.0  | 7.5   | 5.0   | 1000.0  | 0.05     | 10.0  | 2         | [1.0]               | 0.2             | 0.001          |

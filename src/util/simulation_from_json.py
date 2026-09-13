@@ -133,7 +133,9 @@ class SimulationFromJson(Loggable):
                 'LaneCount': self.LaneCount,
                 'LaneVelocityWeights': self.LaneVelocityWeights,
                 'PassingModifier': self.PassingModifier,
-                'ImpatienceStep': self.ImpatienceStep
+                'ImpatienceStep': self.ImpatienceStep,
+                'CollisionIds': list(dict.fromkeys(self.model.collided_ids)),
+                'CollisionTime': self.model.collision_time
         }
 
 
