@@ -3,6 +3,7 @@ from pygame.locals import *
 from models.carbase import CarBase
 from math import *
 import csv
+from bisect import bisect_right
 
 
 class DrawCar:
@@ -87,6 +88,25 @@ class Visualizer:
         self.time_step = self.cars[-1].time[-1] - self.cars[-1].time[-2]
         self.fps = int(3 / self.time_step) # 3 to make it a bit sped up
         self.fps_modifier = int(self.fps / 10)
+        self.max_time_index = min([len(c.time) for c in self.cars])
+        self.sync_draw_cars()
+
+    def set_start_time(self, start_time: float) -> None:
+        if not self.cars:
+            raise RuntimeError("Simulation data must be loaded before setting start time.")
+
+        times = self.cars[0].time[:self.max_time_index]
+        time_index = bisect_right(times, start_time) - 1
+        self.__i__ = max(0, min(time_index, self.max_time_index - 1))
+        self.sync_draw_cars()
+
+    def sync_draw_cars(self):
+        for c in self.cars:
+            # Update position of each drawcar
+            lane_start_y = int((self.height / 2) - (self.lane_width * self.lane_count / 2))
+            draw_car = self.draw_cars[c.id]
+            draw_car.x = int(c.pos[self.__i__] * self.draw_scalar)
+            draw_car.y = int(c.lanes[self.__i__] * self.lane_width) + lane_start_y
 
     def update_cars(self):
         # Keep parsing simulation data if we're running
@@ -98,12 +118,7 @@ class Visualizer:
             self.__i__ = 0
             return
 
-        for c in self.cars:
-            # Update position of each drawcar
-            lane_start_y = int((self.height / 2) - (self.lane_width * self.lane_count / 2))
-            draw_car = self.draw_cars[c.id]
-            draw_car.x = int(c.pos[self.__i__] * self.draw_scalar)
-            draw_car.y = int(c.lanes[self.__i__] * self.lane_width) + lane_start_y
+        self.sync_draw_cars()
 
     # ModelDriver loop
     def run(self) -> None:
